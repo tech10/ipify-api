@@ -7,12 +7,12 @@ package api
 
 import (
 	"encoding/json"
+	"encoding/xml"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
 	"github.com/rdegges/ipify-api/models"
 	"net"
 	"net/http"
-	"os"
 	"strings"
 )
 
@@ -31,12 +31,13 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// list.  We do this because this is always the *origin* IP address, which
 	// is the *true* IP of the user.  For more information on this, see the
 	// Wikipedia page: https://en.wikipedia.org/wiki/X-Forwarded-For
-	ip := net.ParseIP(strings.Split(r.Header.Get("X-Forwarded-For"), ",")[0]).String()
+	ip := net.ParseIP(strings.Split(r.Header.Get("X-Forwarded-For"), ", ")[0]).String()
 
 	// If the user specifies a 'format' querystring, we'll try to return the
 	// user's IP address in the specified format.
 	if format, ok := r.Form["format"]; ok && len(format) > 0 {
 		jsonStr, _ := json.Marshal(models.IPAddress{ip})
+		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		switch format[0] {
 		case "json":
@@ -53,6 +54,11 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 			w.Header().Set("Content-Type", "application/javascript")
 			fmt.Fprintf(w, callback+"("+string(jsonStr)+");")
+			return
+		case "xml":
+			w.Header().Set("Content-Type", "application/xml")
+			xmlStr, _ := xml.MarshalIndent(models.IPAddress{ip}, " ", "  ")
+			fmt.Fprintf(w, xml.Header + string(xmlStr))
 			return
 		}
 	}
