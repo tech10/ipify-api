@@ -1,0 +1,4 @@
+github.com/julienschmidt/httprouter v1.1.1-0.20150927204153-9034cff70da2 h1:gZJESGowdJyDgTh9ewDWGCWwW9LUgV5seGScyHn3RqE=
+github.com/julienschmidt/httprouter v1.1.1-0.20150927204153-9034cff70da2/go.mod h1:SYymIcj16QtmaHHD7aYtjjsJG7VTCxuUUipMqKk8s4w=
+github.com/rs/cors v0.0.0-20150830053420-eb527c8097e0 h1:qhkEtYtKKkPySU8Mi+ZmeJLq/s6UNopcDzxACHUU7RI=
+github.com/rs/cors v0.0.0-20150830053420-eb527c8097e0/go.mod h1:gFx+x8UowdsKA9AchylcLynDq+nNFfI8FkUZdN/jGCU=
