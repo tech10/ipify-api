@@ -10,7 +10,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"github.com/julienschmidt/httprouter"
-	"github.com/rdegges/ipify-api/models"
+	"github.com/tech10/ipify-api/models"
 	"net"
 	"net/http"
 	"strings"
@@ -31,8 +31,13 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// list.  We do this because this is always the *origin* IP address, which
 	// is the *true* IP of the user.  For more information on this, see the
 	// Wikipedia page: https://en.wikipedia.org/wiki/X-Forwarded-For
-	ip := net.ParseIP(strings.Split(r.Header.Get("X-Forwarded-For"), ", ")[0]).String()
-
+	ip := strings.Split(r.Header.Get("X-Forwarded-For"), ", ")[0]
+fmt.Println("IP from forwarded header:", ip)
+	//  Fall back to the request ip.
+	if ip == "" {
+		ip, _, _ = net.SplitHostPort(r.RemoteAddr)
+fmt.Println("IP from host:", ip)
+	}
 	// If the user specifies a 'format' querystring, we'll try to return the
 	// user's IP address in the specified format.
 	if format, ok := r.Form["format"]; ok && len(format) > 0 {
@@ -65,6 +70,6 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	// If no 'format' querystring was specified, we'll default to returning the
 	// IP in plain text.
-	w.Header().Set("Content-Type", "text/plain")
+	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	fmt.Fprintf(w, ip)
 }

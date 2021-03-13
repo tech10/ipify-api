@@ -1,8 +1,8 @@
-module github.com/rdegges/ipify-api
+module github.com/tech10/ipify-api
 
 go 1.16
 
 require (
-	github.com/julienschmidt/httprouter v1.1.1-0.20150927204153-9034cff70da2
-	github.com/rs/cors v0.0.0-20150830053420-eb527c8097e0
+	github.com/julienschmidt/httprouter v1.3.0
+	github.com/rs/cors v1.7.0
 )
