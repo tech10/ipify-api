@@ -19,7 +19,7 @@ import (
 // GetIP returns a user's public facing IP address (IPv4 OR IPv6).
 //
 // By default, it will return the IP address in plain text, but can also return
-// data in both JSON and JSONP if requested to.
+// data in JSON, JSONP, and XML if requested to.
 func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 	err := r.ParseForm()
@@ -36,12 +36,12 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// If the user specifies a 'format' querystring, we'll try to return the
 	// user's IP address in the specified format.
 	if format, ok := r.Form["format"]; ok && len(format) > 0 {
-		jsonStr, _ := json.Marshal(models.IPAddress{ip})
 		w.Header().Set("Access-Control-Allow-Origin", "*")
 
 		switch format[0] {
 		case "json":
-			w.Header().Set("Content-Type", "application/json")
+			jsonStr, _ := json.Marshal(models.IPAddress{ip})
+			w.Header().Set("Content-Type", "application/json; charset=utf-8")
 			fmt.Fprintf(w, string(jsonStr))
 			return
 		case "jsonp":
@@ -51,14 +51,14 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			if val, ok := r.Form["callback"]; ok && len(val) > 0 {
 				callback = val[0]
 			}
-
-			w.Header().Set("Content-Type", "application/javascript")
+			jsonStr, _ := json.Marshal(models.IPAddress{ip})
+			w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
 			fmt.Fprintf(w, callback+"("+string(jsonStr)+");")
 			return
 		case "xml":
-			w.Header().Set("Content-Type", "application/xml")
+			w.Header().Set("Content-Type", "application/xml; charset=utf-8")
 			xmlStr, _ := xml.MarshalIndent(models.IPAddress{ip}, " ", "  ")
-			fmt.Fprintf(w, xml.Header + string(xmlStr))
+			fmt.Fprintf(w, xml.Header+string(xmlStr))
 			return
 		}
 	}
