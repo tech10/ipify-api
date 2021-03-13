@@ -36,6 +36,12 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	if ip == "" {
 		ip, _, _ = net.SplitHostPort(r.RemoteAddr)
 	}
+
+	// Fill IpAddress variable with information.
+	IpAddress := models.IPAddress{
+		IP: ip,
+	}
+
 	// If the user specifies a 'format' querystring, we'll try to return the
 	// user's IP address in the specified format.
 	if format, ok := r.Form["format"]; ok && len(format) > 0 {
@@ -43,9 +49,9 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 
 		switch format[0] {
 		case "json":
-			jsonStr, _ := json.Marshal(models.IPAddress{ip})
+			jsonStr, _ := json.Marshal(IpAddress)
 			w.Header().Set("Content-Type", "application/json; charset=utf-8")
-			fmt.Fprintf(w, string(jsonStr))
+			fmt.Fprint(w, string(jsonStr))
 			return
 		case "jsonp":
 			// If the user specifies a 'callback' parameter, we'll use that as
@@ -54,14 +60,14 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 			if val, ok := r.Form["callback"]; ok && len(val) > 0 {
 				callback = val[0]
 			}
-			jsonStr, _ := json.Marshal(models.IPAddress{ip})
+			jsonStr, _ := json.Marshal(IpAddress)
 			w.Header().Set("Content-Type", "application/javascript; charset=utf-8")
-			fmt.Fprintf(w, callback+"("+string(jsonStr)+");")
+			fmt.Fprint(w, callback+"("+string(jsonStr)+");")
 			return
 		case "xml":
 			w.Header().Set("Content-Type", "application/xml; charset=utf-8")
-			xmlStr, _ := xml.MarshalIndent(models.IPAddress{ip}, " ", "  ")
-			fmt.Fprintf(w, xml.Header+string(xmlStr))
+			xmlStr, _ := xml.MarshalIndent(IpAddress, " ", "  ")
+			fmt.Fprint(w, xml.Header+string(xmlStr))
 			return
 		}
 	}
@@ -69,5 +75,5 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// If no 'format' querystring was specified, we'll default to returning the
 	// IP in plain text.
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
-	fmt.Fprintf(w, ip)
+	fmt.Fprint(w, ip)
 }

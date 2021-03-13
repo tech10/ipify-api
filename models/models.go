@@ -4,7 +4,7 @@
 
 package models
 
-// IPAddress is a struct we use to represent JSON API responses.
+// IPAddress is a struct we use to represent JSON and XML API responses.
 type IPAddress struct {
-	IP string `json:"ip"`
+	IP string `json:"ip" xml:"ip"`
 }

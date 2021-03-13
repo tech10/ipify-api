@@ -60,14 +60,12 @@ your own copy of ipify onto a non-Heroku host.
 ## Building ipify
 
 To develop and build ipify, you'll need to have the Go programming language
-setup on your computer. If you don't, you can read more about it here:
-https://golang.org/
+setup on your computer. If you don't, you can read more about it [here.](https://golang.org/)
 
-Once you have Go installed, you'll need to clone this project into your
-computer's GOPATH. For me, this means I'll typically do something like:
+Once you have Go installed, you'll need to clone this project.
 
 ```bash
-$ git clone https://github.com/rdegges/ipify-api.git ~/go/src/github.com/rdegges/ipify-api
+$ git clone https://github.com/tech10/ipify-api.git
 ```
 
 To build the project, change to the project directory and run:
@@ -77,7 +75,13 @@ $ go build
 ```
 
 This will create the `ipify-api` binary in the current directory that you can
-use for testing.
+use for testing. This will not be built as a static binary by default at the moment.
+
+To build a static binary, execute the following script, which has been tested on Linux and is known to build a static binary correctly.
+
+```bash
+$ ./build.sh
+```
 
 
 ## Deploying ipify
@@ -91,4 +95,4 @@ instantly provision your own copy of the ipify service.
 
 ## Questions?
 
-Got a question? Please create a Github issue!
+Got a question? Please create a GitHub issue!
