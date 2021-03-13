@@ -9,8 +9,8 @@ package main
 
 import (
 	"github.com/julienschmidt/httprouter"
-	"github.com/tech10/ipify-api/api"
 	"github.com/rs/cors"
+	"github.com/tech10/ipify-api/api"
 	"log"
 	"net/http"
 	"os"
@@ -34,10 +34,9 @@ func main() {
 	// Start the server.
 	port := os.Getenv("PORT")
 	if port == "" {
+		log.Println("This server will start using the default port. If you wish to use a different port, please set the PORT environment variable.")
 		port = "3000"
 	}
-
-	log.Println("Starting HTTP server on port:", port)
+	log.Println("Starting HTTP server on port", port+".")
 	log.Fatal(http.ListenAndServe(":"+port, handler))
-
 }

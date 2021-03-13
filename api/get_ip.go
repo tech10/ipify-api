@@ -32,11 +32,9 @@ func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
 	// is the *true* IP of the user.  For more information on this, see the
 	// Wikipedia page: https://en.wikipedia.org/wiki/X-Forwarded-For
 	ip := strings.Split(r.Header.Get("X-Forwarded-For"), ", ")[0]
-fmt.Println("IP from forwarded header:", ip)
 	//  Fall back to the request ip.
 	if ip == "" {
 		ip, _, _ = net.SplitHostPort(r.RemoteAddr)
-fmt.Println("IP from host:", ip)
 	}
 	// If the user specifies a 'format' querystring, we'll try to return the
 	// user's IP address in the specified format.
