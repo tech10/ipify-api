@@ -1,0 +1,18 @@
+# This is a sample systemd service file.
+# Modify the values for the exec parameter,
+# user, and group.
+[Unit]
+Description=ipify api server
+After=network.target
+
+[Service]
+Type=simple
+User=sample
+Group=sample
+Environment="PORT=8080"
+ExecStart=/home/sample/bin/ipify-api
+Restart=always
+RestartSec=10s
+
+[Install]
+WantedBy=multi-user.target
