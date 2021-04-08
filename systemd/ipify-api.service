@@ -12,7 +12,7 @@ Group=sample
 Environment="PORT=8080"
 ExecStart=/home/sample/bin/ipify-api
 Restart=always
-RestartSec=10s
+RestartSec=2s
 
 [Install]
 WantedBy=multi-user.target
