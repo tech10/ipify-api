@@ -8,7 +8,7 @@ This is a fork of [the original repository](https://github.com/rdegges/ipify-api
 - XML format available on output, if using the correct URL.
 - Precompiled binaries available for download.
 - Example systemd service provided.
-- Documentation on deploying on a non-Heroku hosts.
+- Documentation for deploying on a non-Heroku host.
 - Documentation of URL endpoints within the repository itself.
 
 This repository contains the source code for [ipify](https://www.ipify.org), one
