@@ -76,7 +76,7 @@ If you'd like to deploy your own version of ipify to Heroku, you can do so easil
 
 ### Deploying on alternate platforms
 
-If you are not using Heroku or you'd simply like more customization over your build, here are some basic instructions on how to get started.
+If you are not using Heroku or you'd simply like more customization for your build, here are some basic instructions on how to get started.
 
 To deploy this application, you can either build the server yourself, or download one of the pre-compiled binaries available on the releases page. You can then use your operating systems daemon manager to start the server, or you can manually start it yourself. Whether or not you fork it into the background will then be up to you.
 
