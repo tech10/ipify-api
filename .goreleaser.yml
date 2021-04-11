@@ -1,3 +1,4 @@
+project_name: ipify-api
 before:
   hooks:
     - go mod tidy
@@ -7,7 +8,7 @@ builds:
     asmflags:
       - all=-trimpath={{.Env.PWD}}
     ldflags:
-      - -w -s -X main.Version={{.Version}}
+      - -w -s -X main.Version={{.Tag}}
     goos:
       - linux
       - windows
@@ -69,6 +70,7 @@ archives:
       - README.md
       - systemd/*
     wrap_in_directory: true
+    name_template: "{{ .ProjectName }}_{{ .Os }}_{{ .Arch }}{{ if .Arm }}v{{ .Arm }}{{ end }}{{ if .Mips }}_{{ .Mips }}{{ end }}"
 checksum:
   name_template: 'checksums.txt'
 snapshot:
@@ -80,4 +82,8 @@ changelog:
   filters:
     exclude:
       - '^docs:'
-      - '^test:'
+      - '^release:'
+source:
+  enabled: true
+  name_template: "{{ .ProjectName }}_source"
+  format: "tar.gz"
