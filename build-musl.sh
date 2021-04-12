@@ -13,4 +13,4 @@
 # and trim the build path of your current working directory from all information returned in case of a panic.
 # Some programs may have slightly improved performance when running this script.
 
-CC=musl-gcc go build -buildmode=pie "-asmflags=all='-trimpath=`pwd`'" -ldflags "-linkmode external -w -s -extldflags '-static' -X main.Version=$(git describe --tags `git rev-list --tags --max-count=1`)" .
+CC=musl-gcc go build -buildmode=pie -trimpath -ldflags "-linkmode external -w -s -extldflags '-static' -X main.Version=$(git describe --tags `git rev-list --tags --max-count=1`)" .
