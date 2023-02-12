@@ -10,6 +10,8 @@ Type=simple
 User=sample
 Group=sample
 Environment="PORT=8080"
+# Bind to port 80 if desired.
+#AmbientCapabilities=CAP_NET_BIND_SERVICE
 ExecStart=/home/sample/bin/ipify-api
 Restart=always
 RestartSec=2s
