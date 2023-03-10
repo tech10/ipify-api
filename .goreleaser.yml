@@ -48,6 +48,7 @@ builds:
         goarch: 386
 archives:
   -
+    rlcp: true
     replacements:
       darwin: macOS
       linux: Linux
@@ -79,6 +80,7 @@ snapshot:
   name_template: "{{ .Tag }}-next"
 signs:
   - artifacts: checksum
+    args: ["--batch", "-u", "{{ .Env.GPG_FINGERPRINT }}", "--output", "${signature}", "--detach-sign", "${artifact}"]
 changelog:
   sort: asc
   filters:
@@ -87,5 +89,6 @@ changelog:
       - '^release:'
 source:
   enabled: true
+  rlcp: true
   name_template: "{{ .ProjectName }}_source"
   format: "tar.gz"
