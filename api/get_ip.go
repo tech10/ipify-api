@@ -9,11 +9,12 @@ import (
 	"encoding/json"
 	"encoding/xml"
 	"fmt"
-	"github.com/julienschmidt/httprouter"
-	"github.com/tech10/ipify-api/models"
 	"net"
 	"net/http"
 	"strings"
+
+	"github.com/julienschmidt/httprouter"
+	"github.com/tech10/ipify-api/models"
 )
 
 // GetIP returns a user's public facing IP address (IPv4 OR IPv6).
@@ -21,7 +22,6 @@ import (
 // By default, it will return the IP address in plain text, but can also return
 // data in JSON, JSONP, and XML if requested to.
 func GetIP(w http.ResponseWriter, r *http.Request, _ httprouter.Params) {
-
 	err := r.ParseForm()
 	if err != nil {
 		panic(err)

@@ -1,0 +1,57 @@
+[run]
+  deadline = "10m"
+  tests = true
+
+[linters]
+  disable-all = true
+  enable = [
+    "asciicheck",
+    "bidichk",
+    "contextcheck",
+    "decorder",
+    "depguard",
+    "dogsled",
+    "dupl",
+    "dupword",
+    "errcheck",
+    "errname",
+    "errorlint",
+    "exportloopref",
+    "forcetypeassert",
+    "funlen",
+    "gocognit",
+    "gocheckcompilerdirectives",
+    "goconst",
+    "gocritic",
+    "gocyclo",
+    "godot",
+    "gofumpt",
+    "gosimple",
+    "govet",
+    "ineffassign",
+    "misspell",
+    "nakedret",
+    "nilerr",
+    "nilnil",
+    "nolintlint",
+    "prealloc",
+    "predeclared",
+    "staticcheck",
+    "stylecheck",
+    "typecheck",
+    "unconvert",
+    "unparam",
+    "unused",
+    "vetshadow",
+    "wastedassign",
+    "whitespace",
+  ]
+
+[issues]
+  fix = true
+
+[linters-settings.gofumpt]
+    extra-rules = true
+
+[linters-settings.stylecheck]
+    checks = ["all", "-ST1003"]

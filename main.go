@@ -8,20 +8,20 @@
 package main
 
 import (
-	"github.com/julienschmidt/httprouter"
-	"github.com/rs/cors"
-	"github.com/tech10/ipify-api/api"
 	"log"
 	"net/http"
 	"os"
 	"strings"
+
+	"github.com/julienschmidt/httprouter"
+	"github.com/rs/cors"
+	"github.com/tech10/ipify-api/api"
 )
 
 var Version string = "development"
 
 // main launches our web server which runs indefinitely.
 func main() {
-
 	Version = strings.TrimPrefix(Version, "v")
 
 	// Setup all routes.  We only service API requests, so this is basic.
