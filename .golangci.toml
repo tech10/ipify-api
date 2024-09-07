@@ -15,7 +15,6 @@
     "errcheck",
     "errname",
     "errorlint",
-    "exportloopref",
     "forcetypeassert",
     "funlen",
     "gocognit",
@@ -41,7 +40,6 @@
     "unconvert",
     "unparam",
     "unused",
-    "vetshadow",
     "wastedassign",
     "whitespace",
   ]
